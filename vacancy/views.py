@@ -8,12 +8,12 @@ from .models import Speciality, Company, Vacancy
 class MainView(View):
     def get(self, request):
 
-        data_from_Specialities = Speciality.objects.all()[:8]
-        data_from_Companies = Company.objects.all()[:8]
+        specialities = Speciality.objects.all()[:8]
+        companies = Company.objects.all()[:8]
 
         context = {
-                   'data_from_Specialities': data_from_Specialities,
-                   'data_from_Companies': data_from_Companies,
+                   'specialities': specialities,
+                   'companies': companies,
                    }
 
         return render(request, 'vacancy/index.html', context)
@@ -21,26 +21,26 @@ class MainView(View):
 
 class AllVacalsyList(View):
     def get(self, request):
-        data_from_Vacancies = Vacancy.objects.all()
-        count = Vacancy.objects.all().count()
+        vacancies = Vacancy.objects.all()
+        count = len(Vacancy.objects.all())
 
         context = {
-                    'data_from_Vacancies': data_from_Vacancies,
+                    'vacancies': vacancies,
                     'count': count
                     }
 
-        return render(request, 'vacancy/speciality.html', context)
+        return render(request, 'vacancy/all_vacancies.html', context)
 
 
-class VacancyView(View):
+class SpecialityView(View):
     def get(self, request, code:str):
 
-        s = Speciality.objects.get(code=code)
-        data_from_Vacancies = s.vacancies.all()
+        response_data = Speciality.objects.get(code=code)
+        vacancies1 = response_data.vacancies.all()
 
         context = {
-                   'data_from_Vacancies': data_from_Vacancies,
-                   'count': s.vacancies.all().count(),
+                   'vacancies': vacancies1,
+                   'count': len(response_data.vacancies.all()),
                    'name': code
                    }
 
@@ -51,24 +51,35 @@ class VacancyView(View):
 class CompanyView(View):
     def get(self, request, name:str):
 
-        s = Company.objects.get(name=name)
-        data_from_Vacancies = s.company_vacancies.all()
+        response_data = Company.objects.get(name=name)
+        vacancies2 = response_data.company_vacancies.all()
 
         context = {
-                    'data_from_Vacancies': data_from_Vacancies,
-                    'count': s.company_vacancies.all().count(),
+                    'vacancies': vacancies2,
+                    'count': len(response_data.company_vacancies.all()),
                     'name': name
                    }
         return render(request, 'vacancy/company.html', context)
 
 
-class CompanySingleVacancy(View):
+class SpecialitySingleVacancy(View):
     def get(self, request, id:int):
 
-        data_from_Vacancies = Vacancy.objects.get(id=id)
+        vacancies = Vacancy.objects.get(id=id)
+        title = vacancies.title
+        skills = vacancies.skills
+        description = vacancies.description
+        salary_min = vacancies.salary_min
+        salary_max = vacancies.salary_max
+        published_at = vacancies.published_at
 
         context = {
-                    'data_from_Vacancies': data_from_Vacancies,
+                    'title': title,
+                    'skills': skills,
+                    'description': description,
+                    'salary_min': salary_min,
+                    'salary_max': salary_max,
+                    'published_at': published_at
                    }
 
-        return render(request, 'vacancy/company_single_vacansy.html', context)
+        return render(request, 'vacancy/speciality_single_vacansy.html', context)

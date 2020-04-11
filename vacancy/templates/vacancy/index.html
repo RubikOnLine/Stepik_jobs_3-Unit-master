@@ -39,13 +39,13 @@
       <h2 class="h2 font-weight-normal text-center mb-5">Вакансии по рубрикам</h2>
       <div class="row mb-0">
 
-        {% for speciality in data_from_Specialities %}
+        {% for speciality in specialities %}
         <div class="col-6 col-md-6 col-lg-3">
           <div class="card pt-2 text-center mb-2">
             <img class="mx-auto d-block" src="https://place-hold.it/80x80" width="80" height="80" alt="">
             <div class="card-body">
               <p class="card-text">{{ speciality.title }}</p>
-              <p class="card-text"><a href="{% url 'Speciality_page' speciality.code %}">вакансий</a></p>
+              <p class="card-text"><a href="{% url 'speciality_page' speciality.code %}">вакансий</a></p>
             </div>
           </div>
         </div>
@@ -63,13 +63,13 @@
     <section class="my-5 pt-3">
       <h2 class="h2 font-weight-normal text-center mb-5">Нам доверяют лучшие компании</h2>
       <div class="row mb-0">
-          {% for company in data_from_Companies %}
+          {% for company in companies %}
         <div class="col-6 col-md-6 col-lg-3">
           <div class="card pt-4 text-center mb-4">
             <a href="#"><img class="mx-auto d-block" src="https://place-hold.it/150x80" width="150" height="80" alt=""></a>
             <div class="card-body">
                 <p class="card-text">{{ company.location }}</p>
-              <p class="card-text"><a href="{% url 'Companies_page' company.name %}">5 вакансий</a></p>
+              <p class="card-text"><a href="{% url 'companies_page' company.name %}">5 вакансий</a></p>
             </div>
           </div>
         </div>
