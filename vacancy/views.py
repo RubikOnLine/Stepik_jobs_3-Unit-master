@@ -82,4 +82,5 @@ class SpecialitySingleVacancy(View):
                     'published_at': published_at
                    }
 
+
         return render(request, 'vacancy/speciality_single_vacansy.html', context)
