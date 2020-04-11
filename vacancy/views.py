@@ -19,6 +19,19 @@ class MainView(View):
         return render(request, 'vacancy/index.html', context)
 
 
+class AllVacalsyList(View):
+    def get(self, request):
+        data_from_Vacancies = Vacancy.objects.all()
+        count = Vacancy.objects.all().count()
+
+        context = {
+                    'data_from_Vacancies': data_from_Vacancies,
+                    'count': count
+                    }
+
+        return render(request, 'vacancy/speciality.html', context)
+
+
 class VacancyView(View):
     def get(self, request, code:str):
 

@@ -20,10 +20,12 @@ from vacancy.views import MainView
 from vacancy.views import VacancyView
 from vacancy.views import CompanyView
 from vacancy.views import CompanySingleVacancy
+from vacancy.views import AllVacalsyList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainView.as_view(), name='Main_page_index'),
+    path('vacancies/', AllVacalsyList.as_view(), name='all_vacancies_list'),
     path('vacancy/<str:code>/', VacancyView.as_view(), name='Speciality_page'),
     path('company/<str:name>/', CompanyView.as_view(), name='Companies_page'),
     path('company/<str:name>/<int:id>/', CompanySingleVacancy.as_view(), name='Company_single_vac')
