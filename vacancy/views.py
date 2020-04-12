@@ -66,21 +66,24 @@ class SpecialitySingleVacancy(View):
     def get(self, request, id:int):
 
         vacancies = Vacancy.objects.get(id=id)
-        title = vacancies.title
-        skills = vacancies.skills
-        description = vacancies.description
-        salary_min = vacancies.salary_min
-        salary_max = vacancies.salary_max
-        published_at = vacancies.published_at
+        employee_c = vacancies.company.employee_count
+        location = vacancies.company.location
 
-        context = {
-                    'title': title,
-                    'skills': skills,
-                    'description': description,
-                    'salary_min': salary_min,
-                    'salary_max': salary_max,
-                    'published_at': published_at
-                   }
+        # title = vacancies.title
+        # skills = vacancies.skills
+        # description = vacancies.description
+        # salary_min = vacancies.salary_min
+        # salary_max = vacancies.salary_max
+        # published_at = vacancies.published_at
+
+        # context = { 'vacancies': vacancies
+                    # 'title': title,
+                    # 'skills': skills,
+                    # 'description': description,
+                    # 'salary_min': salary_min,
+                    # 'salary_max': salary_max,
+                    # 'published_at': published_at
+                  # }
 
 
-        return render(request, 'vacancy/speciality_single_vacansy.html', context)
+        return render(request, 'vacancy/speciality_single_vacansy.html', {'vacancies': vacancies, 'count': employee_c, 'loc': location})
