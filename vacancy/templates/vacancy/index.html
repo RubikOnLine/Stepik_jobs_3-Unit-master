@@ -45,7 +45,12 @@
             <img class="mx-auto d-block" src="https://place-hold.it/80x80" width="80" height="80" alt="">
             <div class="card-body">
               <p class="card-text">{{ speciality.title }}</p>
-              <p class="card-text"><a href="{% url 'speciality_page' speciality.code %}">вакансий</a></p>
+              <p class="card-text"><a href="{% url 'speciality_page' speciality.code %}">
+              {% for code, count in count_dict_spec.items %}
+              {% if code == speciality.code %}
+              {{count}} вакансий</a></p>
+              {%endif%}
+              {%endfor%}
             </div>
           </div>
         </div>
@@ -69,7 +74,12 @@
             <a href="#"><img class="mx-auto d-block" src="https://place-hold.it/150x80" width="150" height="80" alt=""></a>
             <div class="card-body">
                 <p class="card-text">{{ company.location }}</p>
-              <p class="card-text"><a href="{% url 'companies_page' company.name %}">5 вакансий</a></p>
+              <p class="card-text"><a href="{% url 'companies_page' company.name %}">
+                  {% for name, count in count_dict_comp.items %}
+                  {% if name == company.name %}
+                  {{count}} вакансий</a></p>
+                  {%endif%}
+                  {%endfor%}
             </div>
           </div>
         </div>

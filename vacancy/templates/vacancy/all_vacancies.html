@@ -12,7 +12,7 @@
                 <div class="card-body px-4">
                     <div class="row">
                         <div class="col-12 col-md-8 col-lg-9">
-                            <h2 class="h2 pb-2">{{ data.title}}</h2>
+                            <h2 class="h2 pb-2"><a href="{% url 'speciality_single_page' data.id %}">{{ data.title }}</a></h2>
                             <p class="mb-2">{{ data.skills }}</p>
                             <p>От {{ data.salary_min }} до {{ data.salary_max }} руб.</p>
                             <p class="text-muted pt-1">{{ data.published_at}}</p>
