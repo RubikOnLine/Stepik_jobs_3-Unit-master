@@ -1,6 +1,24 @@
 from django.contrib import admin
-from .models import Company, Speciality, Vacancy
+from .models import Company, Speciality, Vacancy, Application, Resume, User
 # Register your models here.
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('name', 'surname', 'company', 'password')
+    list_filter = ('name', 'surname', 'company')
+
+
+@admin.register(Application)
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ('written_username', 'written_phone', 'written_cover_letter', 'vacancy', 'user')
+    list_filter = ('written_username', 'written_phone', 'written_cover_letter', 'vacancy', 'user')
+
+
+@admin.register(Resume)
+class ResumeAdmin(admin.ModelAdmin):
+    list_display = ('user', 'status', 'salary', 'specialty', 'grade')
+    list_filter = ('user', 'status', 'salary', 'specialty', 'grade')
+
 
 @admin.register(Speciality)
 class SpecialityAdmin(admin.ModelAdmin):
@@ -10,7 +28,7 @@ class SpecialityAdmin(admin.ModelAdmin):
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
- list_display = ('name', 'id', 'description')
+ list_display = ('name', 'id', 'description', 'logo')
  list_filter = ('name', 'id', 'employee_count')
 
 

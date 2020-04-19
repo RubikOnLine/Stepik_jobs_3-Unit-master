@@ -42,7 +42,7 @@
         {% for speciality in specialities %}
         <div class="col-6 col-md-6 col-lg-3">
           <div class="card pt-2 text-center mb-2">
-            <img class="mx-auto d-block" src="https://place-hold.it/80x80" width="80" height="80" alt="">
+            <img class="mx-auto d-block" src="{{ speciality.picture.url }}" width="80" height="80" alt="">
             <div class="card-body">
               <p class="card-text">{{ speciality.title }}</p>
               <p class="card-text"><a href="{% url 'speciality_page' speciality.code %}">
@@ -71,7 +71,7 @@
           {% for company in companies %}
         <div class="col-6 col-md-6 col-lg-3">
           <div class="card pt-4 text-center mb-4">
-            <a href="#"><img class="mx-auto d-block" src="https://place-hold.it/150x80" width="150" height="80" alt=""></a>
+            <a href="#"><img class="mx-auto d-block" src="{{ company.logo.url }}" width="150" height="80" alt=""></a>
             <div class="card-body">
                 <p class="card-text">{{ company.location }}</p>
               <p class="card-text"><a href="{% url 'companies_page' company.name %}">
