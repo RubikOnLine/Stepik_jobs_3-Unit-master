@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block header %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-6 mt-3">
+            <h4  class="text-center">Джуманджи авторизация</h4>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4 class="card-title">Войдите, чтобы управлять</h4>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}">
+                        {{ form|crispy }}
+
+                        <p class="mt-3">Еще нет аккаунта?   <a href="" >Регистрация</a></p>
+
+                        <button type="submit" class="btn btn-primary">Вход</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

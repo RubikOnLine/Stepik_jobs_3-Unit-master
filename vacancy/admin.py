@@ -1,11 +1,14 @@
 from django.contrib import admin
-from .models import Company, Speciality, Vacancy, Application, Resume, User
+
+from vacancy.models import Company, Speciality, Vacancy
+from user_company.models import Application, Resume
+from accounts.models import Profile
+
 # Register your models here.
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('name', 'surname', 'company', 'password')
-    list_filter = ('name', 'surname', 'company')
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('company',)
 
 
 @admin.register(Application)
