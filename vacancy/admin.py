@@ -8,7 +8,7 @@ from accounts.models import Profile
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('company',)
+    list_display = ('company', 'user')
 
 
 @admin.register(Application)
@@ -25,23 +25,21 @@ class ResumeAdmin(admin.ModelAdmin):
 
 @admin.register(Speciality)
 class SpecialityAdmin(admin.ModelAdmin):
- list_display = ('code', 'id', 'title', 'picture')
- list_filter = ('code', 'title', 'id')
- search_fields = ('code', 'title')
+    list_display = ('code', 'id', 'title', 'picture')
+    list_filter = ('code', 'title', 'id')
+    search_fields = ('code', 'title')
+
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
- list_display = ('name', 'id', 'description', 'logo')
- list_filter = ('name', 'id', 'employee_count')
+    list_display = ('name', 'id', 'description', 'logo')
+    list_filter = ('name', 'id', 'employee_count')
 
 
-
- @admin.register(Vacancy)
- class VacancyAdmin(admin.ModelAdmin):
-  list_display = ('title', 'speciality', 'company', 'company_id', 'skills', 'salary_min', 'salary_max')
-  list_filter = ('title', 'speciality', 'company', 'id')
-  search_fields = ('title', 'company')
-  # prepopulated_fields = {'slug': ('title',)}
-  #raw_id_fields = ('title',)
-  date_hierarchy = 'published_at'
-  ordering = ('title', 'published_at')
+@admin.register(Vacancy)
+class VacancyAdmin(admin.ModelAdmin):
+    list_display = ('title', 'speciality', 'company', 'company_id', 'skills', 'salary_min', 'salary_max')
+    list_filter = ('title', 'speciality', 'company', 'id')
+    search_fields = ('title', 'company')
+    date_hierarchy = 'published_at'
+    ordering = ('title', 'published_at')
