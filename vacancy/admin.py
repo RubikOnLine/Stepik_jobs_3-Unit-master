@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from vacancy.models import Company, Speciality, Vacancy
 from user_company.models import Application, Resume
@@ -6,9 +8,18 @@ from accounts.models import Profile
 
 # Register your models here.
 
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('company', 'user')
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+
+
+class UserAdmin(BaseUserAdmin):
+    inlines = [ProfileInline]
+
+
+# @admin.register(Profile)
+# class ProfileAdmin(admin.ModelAdmin):
+#     list_display = ('company', 'user')
 
 
 @admin.register(Application)
@@ -43,3 +54,6 @@ class VacancyAdmin(admin.ModelAdmin):
     search_fields = ('title', 'company')
     date_hierarchy = 'published_at'
     ordering = ('title', 'published_at')
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)

@@ -1,18 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
+from django.urls import reverse
 
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import CreateView
-#from django.views.generic.edit import FormView
 from django.contrib.auth.views import LoginView
 
-from django.urls import reverse
-#from .forms import SignUpForm
+from django.views.generic import CreateView
+
 
 
 class LoginView(LoginView):
     redirect_authenticated_user = True
     template_name = 'login.html'
-
 
 
 class SignupView(CreateView):
@@ -23,20 +22,6 @@ class SignupView(CreateView):
         return reverse('main_page')
 
 
-
-
-# def signup(request):
-#     if request.method == 'POST':
-#         form = SignUpForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             user.refresh_from_db()
-#             user.profile.company = form.cleaned_data.get('company')
-#             user.save()
-#             my_password = form.cleaned_data.get('password1')
-#             user = authenticate(username=user.username, password=my_password)
-#             login(request, user)
-#             return redirect('index')
-#     else:
-#         form = SignUpForm()
-#         return render(request, 'signup.html', {'form': form})
+def logout_view(request):
+    logout(request)
+    return redirect('/')

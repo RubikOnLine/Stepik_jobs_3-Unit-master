@@ -18,7 +18,7 @@
         <li class="nav-item active">
 
             {% if request.user.is_authenticated %}
-            <a href="{% url 'logout' %}" class="nav-link font-weight-bold">Выход</a>
+            <a href="{% url 'logout' %}" class="nav-link font-weight-bold">Выход ({{ user }})</a>
             {% else %}
             <a href="{% url 'login' %}" class="nav-link font-weight-bold">Вход</a>
             {% endif %}

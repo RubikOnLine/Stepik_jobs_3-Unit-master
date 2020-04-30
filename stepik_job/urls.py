@@ -24,17 +24,20 @@ from vacancy.views import SpecialityView
 from vacancy.views import CompanyView
 from vacancy.views import SpecialitySingleVacancy
 
+import debug_toolbar
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainView.as_view(), name='main_page'),
     path('accounts/', include('accounts.urls')),
-    # path('myresume/', include('user_company.urls')),
+    path('myresume/', include('user_company.urls')),
     # path('mycompany/', include('user_company.urls')),
     path('vacancies/', AllVacalsyList.as_view(), name='all_vacancies_list'),
     path('jobs/cat/<str:code>/', SpecialityView.as_view(), name='speciality_page'),
     path('companies/<str:name>/', CompanyView.as_view(), name='companies_page'),
     path('jobs/<int:id>/', SpecialitySingleVacancy.as_view(), name='speciality_single_page'),
+    path('__debug__/', include(debug_toolbar.urls)),
 ]
 
 if settings.DEBUG:

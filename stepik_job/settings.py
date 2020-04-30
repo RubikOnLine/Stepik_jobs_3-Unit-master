@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user_company',
     'django_extensions',
     'crispy_forms',
+    'debug_toolbar',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'stepik_job.urls'
@@ -75,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/myresume/login/'
 LOGOUT_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'stepik_job.wsgi.application'
@@ -137,3 +139,9 @@ MEDIA_SPECIALITY_IMAGE_DIR = 'speciality_images'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
