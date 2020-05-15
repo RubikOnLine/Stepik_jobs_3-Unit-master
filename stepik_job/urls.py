@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib.auth import views
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -24,15 +25,22 @@ from vacancy.views import SpecialityView
 from vacancy.views import CompanyView
 from vacancy.views import SpecialitySingleVacancy
 
+from .views import LoginView, logout_view, SignupView
+
 import debug_toolbar
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainView.as_view(), name='main_page'),
-    path('accounts/', include('accounts.urls')),
+
+    path('accounts/login/', LoginView.as_view(), name='login'),
+    path('accounts/logout/', logout_view, name='logout'),
+    path('accounts/signup/', SignupView.as_view(), name='signup'),
+
     path('myresume/', include('user_company.urls')),
     # path('mycompany/', include('user_company.urls')),
+
     path('vacancies/', AllVacalsyList.as_view(), name='all_vacancies_list'),
     path('jobs/cat/<str:code>/', SpecialityView.as_view(), name='speciality_page'),
     path('companies/<str:name>/', CompanyView.as_view(), name='companies_page'),

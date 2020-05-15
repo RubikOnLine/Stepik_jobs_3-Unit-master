@@ -13,8 +13,8 @@ class MainView(View):
 
          # Для подсчета количества вакансий по той или иной специальности, и количества вакансий той или иной компании составляем словари следующего формата: count_dict_spec = {'frontend': количество} и count_dict_comp = {'назв. компании': количество}
 
-        count_dict_spec = {spec.code: len(spec.vacancies.all()) for spec in specialities}
-        count_dict_comp = {comp.name: len(comp.company_vacancies.all()) for comp in companies}
+        count_dict_spec = {spec.code: len(spec.vacancy.all()) for spec in specialities}
+        count_dict_comp = {comp.name: len(comp.vacancy.all()) for comp in companies}
 
         context = {
                    'specialities': specialities,
@@ -43,11 +43,11 @@ class SpecialityView(View):
     def get(self, request, code:str):
 
         response_data = Speciality.objects.get(code=code)
-        vacancies = response_data.vacancies.all()
+        vacancies = response_data.vacancy.all()
 
         context = {
                    'vacancies': vacancies,
-                   'count': len(response_data.vacancies.all()),
+                   'count': len(response_data.vacancy.all()),
                    'name': code
                    }
 
@@ -59,11 +59,11 @@ class CompanyView(View):
     def get(self, request, name:str):
 
         response_data = Company.objects.get(name=name)
-        vacancies = response_data.company_vacancies.all()
+        vacancies = response_data.vacancy.all()
 
         context = {
                     'vacancies': vacancies,
-                    'count': len(response_data.company_vacancies.all()),
+                    'count': len(response_data.vacancy.all()),
                     'name': name,
                     'logo': response_data.logo
                    }

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'vacancy',
-    'accounts',
+    # 'accounts',
     'user_company',
     'django_extensions',
     'crispy_forms',

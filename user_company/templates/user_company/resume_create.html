@@ -1,13 +1,58 @@
 {% extends 'user_base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
-<main class="container mt-3 pb-5">
-  <section class="col-12 col-lg-6 offset-lg-3 mt-5 card">
-    <div class="card-body px-3 pb-4">
-      <h1 class="h4 pt-2">Мое резюме</h1>
-      <p class="mt-2"> {{user}}, у вас нет резюме. Хотите создать его?</p>
-      <a href="{% url 'resume_edit' %}" class="btn btn-info mb-2">Создать резюме</a>
-    </div>
-  </section>
-</main>
+
+<form action="{% url 'resume_create' %}" method="post">
+    {% csrf_token %}
+    <main class="container mt-3 pb-5">
+        <section class="col-12 col-lg-6 offset-lg-3 mt-5 card">
+            <div class="card-body px-3 pb-4">
+                <p><h2>Мое резюме</h2> </p>
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors }}
+                </div>
+                {% endif %}
+
+                <div class="form-row">
+                  <div class="form-group col-md-6 mb-0">
+                    {{ form.name|as_crispy_field }}
+                  </div>
+                  <div class="form-group col-md-6 mb-0">
+                    {{ form.surname|as_crispy_field }}
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6 mb-0">
+                    {{ form.status|as_crispy_field }}
+                  </div>
+                  <div class="form-group col-md-6 mb-0">
+                    {{ form.salary|as_crispy_field }}
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6 mb-0">
+                    {{ form.spec|as_crispy_field }}
+                  </div>
+                  <div class="form-group col-md-6 mb-0">
+                    {{ form.grade|as_crispy_field }}
+                  </div>
+                </div>
+
+                {{ form.education|as_crispy_field }}
+                {{ form.experience|as_crispy_field }}
+                {{ form.portfolio|as_crispy_field }}
+
+            <div class="form-group col-md-6 mb-0">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+
+        </div>
+        </section>
+    </main>
+</form>
 {% endblock %}
